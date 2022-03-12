@@ -172,7 +172,7 @@ def main():
     ex = SpellCheckUI(root)
     root.title('.twb Spellchecker')
     root.geometry('600x300+50+50')
-    root.iconbitmap('./Bars.ico')
+    #root.iconbitmap('./Bars.ico')
     root.mainloop()
 
 if __name__ == '__main__':
