@@ -1,18 +1,13 @@
-from importlib.resources import path
-from sre_parse import State
-from sysconfig import get_path
 from tkinter import BOTTOM, NORMAL, DISABLED, LEFT, RIGHT, Button, Frame, StringVar, Tk, BOTH, Text, Menu, END
 from tkinter import filedialog
 import tkinter
-from tkinter.constants import DISABLED, NORMAL
 from tkinter.ttk import Label
 from turtle import begin_fill, width
-from xml.dom.pulldom import START_DOCUMENT
 from lxml import etree
 from spellchecker import SpellChecker
 import re
 
-def spellcheck_workbook(wbname,path='',new_text=''):
+def spellcheck_workbook(wbname,tpath='',new_text=''):
     '''
     This will take in a workbook and check titles and text box objects for spelling errors. If errors are found
     it will tell you the text string, which word was flagged and where it was located. It is currently avoiding
@@ -24,9 +19,8 @@ def spellcheck_workbook(wbname,path='',new_text=''):
     spell = SpellChecker()
     etree.register_namespace('user', "http://www.tableausoftware.com/xml/user")
 
-    def update_element(path,new_text):
-        print(path)
-        for child in tree.xpath(path):
+    def update_element(tpath,new_text):
+        for child in tree.xpath(tpath):
          if child is not None:
             child.text = new_text
             et = etree.ElementTree(troot)
@@ -70,8 +64,8 @@ def spellcheck_workbook(wbname,path='',new_text=''):
         return matches
 
     #make updates for values passed in
-    if len(path) > 0:
-        update_element(path,new_text)
+    if len(tpath) > 0:
+        update_element(tpath,new_text)
     
     #let's call find_errors for worksheets and dashboards
     spelling = find_errors('title')
